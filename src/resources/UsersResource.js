@@ -5,6 +5,20 @@ import User from '../models/user';
 export default {
   resource: User,
   options: {
+    parent: {
+      icon: 'User',
+    },
+    actions: {
+      resetPassword: {
+        actionType: 'record',
+        icon: 'Password',
+        handler: async (request, response, context) => {
+          return {
+            record: context.record.toJSON(),
+          }
+        }
+      }, 
+    },
     properties: {
       id:{
         position: 1,
