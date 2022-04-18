@@ -17,8 +17,6 @@ var _baseActionComponent = _interopRequireDefault(require("../app/base-action-co
 
 var _filterDrawer = _interopRequireDefault(require("../app/filter-drawer"));
 
-var _queryHasFilter = _interopRequireDefault(require("./utils/query-has-filter"));
-
 var _errorMessage = require("../app/error-message");
 
 var _viewHelpers = _interopRequireDefault(require("../../../backend/utils/view-helpers/view-helpers"));
@@ -59,13 +57,12 @@ const getAction = resource => {
 const ResourceAction = props => {
   const {
     resources,
-    match,
-    location
+    match
   } = props;
   const {
     resourceId
   } = match.params;
-  const [filterVisible, setFilerVisible] = (0, _react.useState)((0, _queryHasFilter.default)(location.search));
+  const [filterVisible, setFilterVisible] = (0, _react.useState)(false);
   const [tag, setTag] = (0, _react.useState)('');
   const resource = resources.find(r => r.id === resourceId);
 
@@ -91,7 +88,7 @@ const ResourceAction = props => {
     });
   }
 
-  const toggleFilter = listAction.showFilter ? () => setFilerVisible(!filterVisible) : undefined;
+  const toggleFilter = listAction.showFilter ? () => setFilterVisible(!filterVisible) : undefined;
   return /*#__PURE__*/_react.default.createElement(_designSystem.Box, {
     variant: "grey",
     width: listAction.containerWidth,
@@ -106,10 +103,11 @@ const ResourceAction = props => {
     resource: resource,
     setTag: setTag
   }), listAction.showFilter ? /*#__PURE__*/_react.default.createElement(_filterDrawer.default, {
+    key: filterVisible.toString(),
     resource: resource,
     isVisible: filterVisible,
     toggleFilter: () => {
-      setFilerVisible(!filterVisible);
+      setFilterVisible(!filterVisible);
     }
   }) : '');
 };

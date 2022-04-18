@@ -38,9 +38,7 @@ function useNavigationResources(resources) {
     onClick: event => {
       if (resource.href) {
         event.preventDefault();
-        history.push(resource.href, {
-          previousPage: window.location.href
-        });
+        history.push(resource.href);
       }
     }
   }), [location, history]); // grouping resources into parents

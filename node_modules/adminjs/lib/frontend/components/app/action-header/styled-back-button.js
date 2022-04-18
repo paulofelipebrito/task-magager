@@ -13,6 +13,8 @@ var _reactRouterDom = require("react-router-dom");
 
 var _designSystem = require("@adminjs/design-system");
 
+var _reactRedux = require("react-redux");
+
 var _viewHelpers = _interopRequireDefault(require("../../../../backend/utils/view-helpers/view-helpers"));
 
 const _excluded = ["rounded"];
@@ -42,13 +44,15 @@ const StyledBackButton = props => {
     resourceId,
     showInDrawer
   } = props;
-  const location = (0, _reactRouterDom.useLocation)();
   const cssCloseIcon = showInDrawer ? 'ChevronRight' : 'ChevronLeft';
   const {
-    previousPage
-  } = location.state || {};
-  const previousPageUrl = previousPage ? new URL(previousPage) : null;
-  const backButtonUrl = previousPageUrl ? previousPageUrl.pathname + previousPageUrl.search : h.resourceUrl({
+    from
+  } = (0, _reactRedux.useSelector)(state => state.router);
+  const {
+    pathname,
+    search
+  } = from;
+  const backButtonUrl = pathname ? [pathname, search].join('') : h.resourceUrl({
     resourceId,
     search: window.location.search
   });

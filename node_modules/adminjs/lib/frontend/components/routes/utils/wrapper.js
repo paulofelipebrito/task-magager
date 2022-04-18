@@ -11,7 +11,7 @@ var _styledComponents = _interopRequireDefault(require("styled-components"));
 
 var _designSystem = require("@adminjs/design-system");
 
-const _excluded = ["children", "variant", "color"];
+const _excluded = ["children", "variant", "color", "showFilter"];
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21,9 +21,23 @@ function _objectWithoutProperties(source, excluded) { if (source == null) return
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
+const StyledWrapperWithFilter = (0, _styledComponents.default)(_designSystem.Box).withConfig({
+  displayName: "wrapper__StyledWrapperWithFilter",
+  componentId: "sc-1jcopgf-0"
+})(["& > ", "{background:", ";padding:", ";overflow:visible;}& > ", "{background:", ";padding:0 ", " ", ";}"], _designSystem.DrawerContent, ({
+  theme
+}) => theme.colors.white, ({
+  theme
+}) => theme.space.xxl, _designSystem.DrawerFooter, ({
+  theme
+}) => theme.colors.white, ({
+  theme
+}) => theme.space.xxl, ({
+  theme
+}) => theme.space.xxl);
 const StyledWrapper = (0, _styledComponents.default)(_designSystem.Box).withConfig({
   displayName: "wrapper__StyledWrapper",
-  componentId: "sc-1jcopgf-0"
+  componentId: "sc-1jcopgf-1"
 })(["& ", "{background:", ";padding:", ";overflow:visible;}& ", "{background:", ";padding:0 ", " ", ";}"], _designSystem.DrawerContent, ({
   theme
 }) => theme.colors.white, ({
@@ -41,11 +55,13 @@ const Wrapper = props => {
   const {
     children,
     variant,
-    color
+    color,
+    showFilter = false
   } = props,
         rest = _objectWithoutProperties(props, _excluded);
 
-  return /*#__PURE__*/_react.default.createElement(StyledWrapper, _extends({}, rest, {
+  const Component = showFilter ? StyledWrapperWithFilter : StyledWrapper;
+  return /*#__PURE__*/_react.default.createElement(Component, _extends({}, rest, {
     variant: "grey",
     mx: "auto"
   }), children);

@@ -45,9 +45,7 @@ const SidebarPages = props => {
       event.preventDefault();
 
       if (element.href) {
-        history.push(element.href, {
-          previousPage: window.location.href
-        });
+        history.push(element.href);
       }
     }
   }));

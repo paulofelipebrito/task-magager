@@ -76,10 +76,9 @@ const FilterDrawer = props => {
         search.delete(`filters.${key}`);
       }
     });
+    toggleFilter();
     search.set('page', '1');
-    history.push(`${history.location.pathname}?${search.toString()}`, {
-      previousPage: window.location.href
-    });
+    history.push(`${history.location.pathname}?${search.toString()}`);
     return false;
   };
 
@@ -95,9 +94,8 @@ const FilterDrawer = props => {
     }
 
     const query = filteredSearch.toString() === '' ? `?${filteredSearch.toString()}` : '';
-    history.push(history.location.pathname + query, {
-      previousPage: window.location.href
-    });
+    toggleFilter();
+    history.push(history.location.pathname + query);
     setFilter({});
   };
 

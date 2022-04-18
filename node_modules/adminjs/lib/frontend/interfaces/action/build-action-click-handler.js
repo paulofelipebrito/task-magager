@@ -39,11 +39,12 @@ const buildActionClickHandler = options => {
     }
 
     if ((0, _actionHasComponent.actionHasComponent)(action)) {
-      callApi();
-    } else if (href) {
-      push(href, {
-        previousPage: window.location.href
-      });
+      // eslint-disable-next-line consistent-return
+      return callApi();
+    }
+
+    if (href) {
+      push(href);
     }
   };
 

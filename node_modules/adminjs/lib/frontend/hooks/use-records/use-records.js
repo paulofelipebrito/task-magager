@@ -65,9 +65,7 @@ function useRecords(resourceId) {
       }
 
       if (listActionResponse.redirectUrl) {
-        history.push(listActionResponse.redirectUrl, {
-          previousPage: window.location.href
-        });
+        history.push(listActionResponse.redirectUrl);
         return;
       }
 
@@ -89,15 +87,8 @@ function useRecords(resourceId) {
 
   (0, _react.useEffect)(() => {
     if ((0, _appendForceRefresh.hasForceRefresh)(location.search)) {
-      const locationState = location.state || {};
-
-      if (!locationState.previousPage) {
-        locationState.previousPage = window.location.href;
-      }
-
       history.replace({
         pathname: location.pathname,
-        state: locationState,
         search: (0, _appendForceRefresh.removeForceRefresh)(location.search).toString()
       });
     } else {

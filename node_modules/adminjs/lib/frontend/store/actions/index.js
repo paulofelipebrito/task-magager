@@ -159,3 +159,16 @@ Object.keys(_setNoticeProgress).forEach(function (key) {
     }
   });
 });
+
+var _routeChanged = require("./route-changed");
+
+Object.keys(_routeChanged).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (key in exports && exports[key] === _routeChanged[key]) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function () {
+      return _routeChanged[key];
+    }
+  });
+});

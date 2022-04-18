@@ -69,10 +69,7 @@ const List = ({
     const search = new URLSearchParams(location.search);
     search.set('page', pageNumber.toString());
     history.push({
-      search: search.toString(),
-      state: {
-        previousPage: window.location.href
-      }
+      search: search.toString()
     });
   };
 

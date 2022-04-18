@@ -27,9 +27,7 @@ const useActionResponseHandler = onActionCall => {
 
     if (data.redirectUrl && location.pathname !== data.redirectUrl) {
       const appended = (0, _appendForceRefresh.appendForceRefresh)(data.redirectUrl);
-      history.push(appended, {
-        previousPage: window.location.href
-      });
+      history.push(appended);
     }
 
     if (onActionCall) {

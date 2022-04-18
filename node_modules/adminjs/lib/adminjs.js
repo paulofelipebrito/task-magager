@@ -27,7 +27,7 @@ var _loginTemplate = _interopRequireDefault(require("./frontend/login-template")
 
 var _config = require("./locale/config");
 
-var _en = _interopRequireDefault(require("./locale/en"));
+var _locale = require("./locale");
 
 var _translateFunctions = require("./utils/translate-functions.factory");
 
@@ -109,11 +109,13 @@ class AdminJS {
   }
 
   initI18n() {
-    var _this$options$locale, _this$options$locale2;
+    var _this$options$locale, _locales$language, _this$options$locale2;
 
+    const language = ((_this$options$locale = this.options.locale) === null || _this$options$locale === void 0 ? void 0 : _this$options$locale.language) || _locale.locales.en.language;
+    const defaultTranslations = ((_locales$language = _locale.locales[language]) === null || _locales$language === void 0 ? void 0 : _locales$language.translations) || _locale.locales.en.translations;
     this.locale = {
-      translations: (0, _config.combineTranslations)(_en.default.translations, (_this$options$locale = this.options.locale) === null || _this$options$locale === void 0 ? void 0 : _this$options$locale.translations),
-      language: ((_this$options$locale2 = this.options.locale) === null || _this$options$locale2 === void 0 ? void 0 : _this$options$locale2.language) || _en.default.language
+      translations: (0, _config.combineTranslations)(defaultTranslations, (_this$options$locale2 = this.options.locale) === null || _this$options$locale2 === void 0 ? void 0 : _this$options$locale2.translations),
+      language
     };
 
     if (_i18next.default.isInitialized) {

@@ -87,7 +87,7 @@ const ActionHeader = props => {
 
 
   const customResourceButtons = (0, _actionsToButtonGroup.actionsToButtonGroup)({
-    actions: resource.resourceActions.filter(ra => !['list', 'new'].includes(ra.name)),
+    actions: action.showResourceActions ? resource.resourceActions.filter(ra => !['list', 'new'].includes(ra.name)) : [],
     params: {
       resourceId
     },

@@ -113,6 +113,27 @@ const versionsReducer = (state = {}, action) => {
   }
 };
 
+const routerReducer = (state = {
+  from: {},
+  to: {}
+}, action) => {
+  switch (action.type) {
+    case _actions.INITIAL_ROUTE:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        from: _objectSpread({}, action.data)
+      });
+
+    case _actions.ROUTE_CHANGED:
+      return {
+        from: _objectSpread({}, state.to),
+        to: _objectSpread({}, action.data)
+      };
+
+    default:
+      return state;
+  }
+};
+
 const noticesReducer = (state = [], action) => {
   switch (action.type) {
     case _actions.ADD_NOTICE:
@@ -148,7 +169,8 @@ const reducer = (0, _redux.combineReducers)({
   notices: noticesReducer,
   versions: versionsReducer,
   pages: pagesReducer,
-  locale: localesReducer
+  locale: localesReducer,
+  router: routerReducer
 });
 
 var _default = (initialState = {}) => (0, _redux.createStore)(reducer, initialState);

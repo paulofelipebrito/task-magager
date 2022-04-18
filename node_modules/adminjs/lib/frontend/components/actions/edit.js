@@ -58,9 +58,7 @@ const Edit = props => {
     event.preventDefault();
     handleSubmit().then(response => {
       if (response.data.redirectUrl) {
-        history.push((0, _appendForceRefresh.appendForceRefresh)(response.data.redirectUrl), {
-          previousPage: window.location.href
-        });
+        history.push((0, _appendForceRefresh.appendForceRefresh)(response.data.redirectUrl));
       }
     });
     return false;

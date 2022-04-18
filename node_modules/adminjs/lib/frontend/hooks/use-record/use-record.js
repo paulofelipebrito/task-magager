@@ -89,7 +89,7 @@ const useRecord = (initialRecord, resourceId, options) => {
         'Content-Type': 'multipart/form-data'
       }
     };
-    const promise = record.id ? api.recordAction(_objectSpread(_objectSpread({}, params), {}, {
+    const promise = initialRecord !== null && initialRecord !== void 0 && initialRecord.id ? api.recordAction(_objectSpread(_objectSpread({}, params), {}, {
       actionName: 'edit',
       recordId: record.id
     })) : api.resourceAction(_objectSpread(_objectSpread({}, params), {}, {

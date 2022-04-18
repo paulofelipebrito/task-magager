@@ -25,6 +25,8 @@ var _notice = _interopRequireDefault(require("./app/notice"));
 
 var _routes = require("./routes");
 
+var _useHistoryListen = _interopRequireDefault(require("../hooks/use-history-listen"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
@@ -48,6 +50,7 @@ const h = new _viewHelpers.default();
 const App = () => {
   const [sidebarVisible, toggleSidebar] = (0, _react.useState)(false);
   const location = (0, _reactRouter.useLocation)();
+  (0, _useHistoryListen.default)();
   (0, _react.useEffect)(() => {
     if (sidebarVisible) {
       toggleSidebar(false);

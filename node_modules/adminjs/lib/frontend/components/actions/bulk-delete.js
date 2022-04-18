@@ -76,9 +76,7 @@ const BulkDelete = props => {
         const search = new URLSearchParams(window.location.search); // bulk function have recordIds in the URL so it has to be stripped before redirect
 
         search.delete('recordIds');
-        history.push((0, _appendForceRefresh.appendForceRefresh)(response.data.redirectUrl, search.toString()), {
-          previousPage: window.location.href
-        });
+        history.push((0, _appendForceRefresh.appendForceRefresh)(response.data.redirectUrl, search.toString()));
       }
     }).catch(error => {
       setLoading(false);
