@@ -1,11 +1,20 @@
+import "dotenv/config";
+
+import './database';
+
 import AdminJS from 'adminjs';
 import AdminJSExpress from '@adminjs/express';
+import AdminJSSequelize from '@adminjs/sequelize';
 import express from 'express';
+
+import UsersResource from './resources/UserResource';
+
+AdminJS.registerAdapter(AdminJSSequelize);
 
 const adminJS = new AdminJS({
   database: [],
   rootPath: '/admin',
-  resources: [],
+  resources: [UsersResource],
 });
 
 const app = express();

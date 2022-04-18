@@ -7,18 +7,27 @@
   "license": "MIT",
   "dependencies": {
     "@adminjs/express": "^4.1.0",
+    "@adminjs/sequelize": "^2.1.5",
     "adminjs": "^5.8.0",
+    "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "express-formidable": "^1.2.0",
     "express-session": "^1.17.2",
+    "pg": "^8.7.3",
+    "pg-hstore": "^2.3.4",
+    "postgres": "^3.0.2",
+    "sequelize": "^6.18.0",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.15",
     "prettier": "^2.6.2",
+    "sequelize-cli": "^6.4.1",
     "sucrase": "^3.20.3"
   },
   "scripts": {
-    "dev": "nodemon ./src/server.js"
+    "dev": "nodemon ./src/server.js",
+    "db:migrate": "sequelize-cli db:migrate",
+    "db:undo": "sequelize-cli db:migrate:undo"
   }
 }
