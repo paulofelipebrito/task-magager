@@ -8,14 +8,14 @@
   "dependencies": {
     "@adminjs/express": "^4.1.0",
     "@adminjs/sequelize": "^2.1.5",
-    "adminjs": "^5.8.0",
+    "adminjs": "^5.9.9",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "express-formidable": "^1.2.0",
     "express-session": "^1.17.2",
     "pg": "^8.7.3",
     "pg-hstore": "^2.3.4",
-    "postgres": "^3.0.2",
+    "postgres": "^3.0.5",
     "sequelize": "^6.18.0",
     "tslib": "^2.3.1"
   },
