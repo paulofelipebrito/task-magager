@@ -8,14 +8,22 @@ import AdminJSSequelize from '@adminjs/sequelize';
 import express from 'express';
 
 import UsersResource from './resources/UsersResource';
+import ProjectsResource from './resources/ProjectsResource';
+import TasksResource from './resources/TasksResource';
+
+import locale from './locales';
 
 AdminJS.registerAdapter(AdminJSSequelize);
 
 const app = express();
 const adminJS = new AdminJS({
-  database: [],
+  databases: [],
   rootPath: '/admin',
-  resources: [UsersResource],
+  dashboard: {
+    component: AdminJS.bundle('./components/Dashboard/index'),
+  },
+  resources: [UsersResource, ProjectsResource, TasksResource],
+  ...locale,
 });
 
 
