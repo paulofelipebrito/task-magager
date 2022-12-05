@@ -1,23 +1,15 @@
 import AdminJS from 'adminjs';
 
 import User from '../models/user';
+import bcrypt from "bcrypt";
+
+import { hasAdminPermission } from '../services/auth'
 
 export default {
   resource: User,
   options: {
     parent: {
       icon: 'User',
-    },
-    actions: {
-      resetPassword: {
-        actionType: 'record',
-        icon: 'Password',
-        handler: async (request, response, context) => {
-          return {
-            record: context.record.toJSON(),
-          }
-        }
-      }, 
     },
     properties: {
       id:{
@@ -35,8 +27,13 @@ export default {
         position: 4,
         isRequired: true,
       },
-      role:{
+      password:{
         position: 5,
+        isRequired: true,
+        isVisible: {list: false, filter: false, show: false, edit: true},
+      },
+      role:{
+        position: 6,
         isRequired: true,
         availableValues: [
           {value : 'admin', label: 'Administrador'},
@@ -45,7 +42,7 @@ export default {
         ]
       },
       status:{
-        position: 6,
+        position: 7,
         isRequired: true,
         availableValues: [
           {value : 'active', label: 'Ativo'},
@@ -53,18 +50,42 @@ export default {
         ]
       },
       createdAt:{
-        position: 7,
-        isVisible: {list: true, filter: true, show: true, edit: false},
-      },
-      updatedAt:{
         position: 8,
         isVisible: {list: true, filter: true, show: true, edit: false},
       },
-      password:{
-        isVisible: false,
+      updatedAt:{
+        position: 9,
+        isVisible: {list: true, filter: true, show: true, edit: false},
       },
+      
       password_hash:{
         isVisible: false,
+      }
+    },
+    actions: {
+      resetPassword: {
+        actionType: 'record',
+        icon: 'Password',
+        handler: async (request, response, context) => {
+          return {
+            record: context.record.toJSON(),
+          }
+        }
+      }, 
+      new: {
+        before: async (request) =>{
+          if(request.payload.password) {
+            request.payload = {
+              ...request.payload,
+              password_hash: await bcrypt.hash(request.payload.password, 5),
+              password: undefined,
+            }
+          }
+          return request
+        }
+      },
+      list: {
+        isAccessible: ({currentAdmin}) => hasAdminPermission(currentAdmin),
       }
     },
   },

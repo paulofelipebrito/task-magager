@@ -2,11 +2,24 @@ import AdminJS from 'adminjs';
 
 import Project from '../models/project';
 
+import { hasAdminPermission } from '../services/auth'
+
 export default {
   resource: Project,
   options: {
     parent: {
       icon: 'Roadmap',
+    },
+    actions:{
+      new: {
+        isAccessible: ({currentAdmin}) => hasAdminPermission(currentAdmin),
+      },
+      edit: {
+        isAccessible: ({currentAdmin}) => hasAdminPermission(currentAdmin),
+      },
+      delete: {
+        isAccessible: ({currentAdmin}) => hasAdminPermission(currentAdmin),
+      }
     },
     properties: {
       id:{

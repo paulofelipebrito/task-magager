@@ -1,4 +1,5 @@
 import Sequelize, { Model } from 'sequelize';
+import {createPasswordHash, checkPassword} from '../services/auth';
 
 class User extends Model {
   /**
@@ -38,11 +39,32 @@ class User extends Model {
         singular: 'user',
         plural: 'users',
       },
-    })
+    },
+    {hooks: {
+      beforeSave: async (user) => {
+        if(user.password){
+          user.password_hash = await createPasswordHash(user.password)
+        }
+        console.log(user.password)
+      }
+    }}
+    );
+    /*this.addHook(('beforeSave', async (user) => {
+      if(user.password){
+        user.password_hash = await createPasswordHash(user.password)
+      }
+    }))*/
+    
   }
+
   static associate(models) {
     // define association here
+    this.hasMany(models.Project);
+    this.hasMany(models.Task);
+  }
 
+  checkPassword(password) {
+    return checkPassword(this, password);
   }
 }
 

@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-import {Box} from '@adminjs/design-system';
+import { Box } from "@adminjs/design-system";
 
 export const Card = styled(Box)`
   display: ${({flex}) => (flex ? 'flex' : 'block')}; 
@@ -18,4 +18,4 @@ export const Card = styled(Box)`
 Card.defaultProps = {
   variant: "white",
   boxShadow: "card",
-};
+}

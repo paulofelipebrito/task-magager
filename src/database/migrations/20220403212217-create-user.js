@@ -13,12 +13,12 @@ module.exports = {
         type: Sequelize.STRING
       },
       email: {
-        type: Sequelize.STRING,
         unique: true,
         allowNull: false,
+        type: Sequelize.STRING,
       },
       password_hash: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       role:{
         allowNull: false,
